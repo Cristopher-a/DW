@@ -9,7 +9,7 @@ uri = "mongodb+srv://crisesv18:LoKY1804@aztech.ww3ye9j.mongodb.net/?retryWrites=
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 
-def main(page):
+def inic(page):
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.title = "Blue Switch"
@@ -68,4 +68,5 @@ def cargar_dashboard(page):
     page.controls.append(nav(page))
     page.update()
 
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=inic)
