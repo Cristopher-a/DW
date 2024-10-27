@@ -144,13 +144,13 @@ def recov(page: ft.Page):
     
     enviado = ft.Banner(
         bgcolor=ft.colors.GREEN_600,
-        leading=ft.Icon(ft.icons.ERROR_OUTLINE, color=ft.colors.GREEN_800, size=40),
+        leading=ft.Icon(ft.icons.MARK_EMAIL_READ_OUTLINED, color=ft.colors.GREEN_800, size=40),
         content=ft.Text("Correo enviado"),
         actions=[ft.TextButton(text="Cerrar", style=ft.ButtonStyle(color=ft.colors.WHITE), on_click=lambda _: page.close(enviado))]
     )
     cambiado = ft.Banner(
         bgcolor=ft.colors.GREEN_600,
-        leading=ft.Icon(ft.icons.ERROR_OUTLINE, color=ft.colors.GREEN_800, size=40),
+        leading=ft.Icon(ft.icons.PUBLISHED_WITH_CHANGES_SHARP, color=ft.colors.GREEN_800, size=40),
         content=ft.Text("Contraseña cambiada con exito"),
         actions=[ft.TextButton(text="Cerrar", style=ft.ButtonStyle(color=ft.colors.WHITE), on_click=lambda _: page.close(cambiado))]
     )

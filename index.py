@@ -5,6 +5,7 @@ import bcrypt
 from navigation import nav
 from recoverp import recov
 
+
 uri = "mongodb+srv://crisesv18:LoKY1804@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
 client = MongoClient(uri, server_api=ServerApi('1'))
 
@@ -27,7 +28,8 @@ def inic(page):
     def recover(e):
         page.controls.clear()
         page.controls.append(recov(page))
-
+    def create(e):
+        page.controls.clear()
 
 
 
@@ -56,7 +58,7 @@ def inic(page):
             ft.Row([user_field], alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([password_field], alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([ft.TextButton(text="Recuperar contraseña", on_click=recover), 
-                    ft.TextButton(text="Crear Cuenta")], alignment=ft.MainAxisAlignment.CENTER),
+                    ft.TextButton(text="Crear Cuenta",on_click=create)], alignment=ft.MainAxisAlignment.CENTER),
             ft.Row([ft.ElevatedButton(text="Iniciar Sesión", on_click=iniciar_sesion)], alignment=ft.MainAxisAlignment.CENTER)
         ], alignment=ft.MainAxisAlignment.CENTER)
     )
