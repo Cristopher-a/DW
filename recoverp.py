@@ -42,7 +42,7 @@ def recov(page: ft.Page):
 
 
     def cocon(e):
-        if txtcont==None:
+        if txtcont==None or txtconcont==None:
             btncon.disabled = True
         elif txtcont.value == txtconcont.value:
             btncon.disabled = False

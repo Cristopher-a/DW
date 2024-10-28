@@ -37,6 +37,13 @@ def creative(page:ft.Page):
             collection.insert_one(reg)
             page.open(creado)
             Timer(3, close_banner, args=(page, creado)).start()
+    def habil(e):
+        if all([correo_field.value, password_field.value, name_field.value]):
+            btn.disabled = False
+            page.update()
+        else:
+            btn.disabled = True
+            page.update()
 
     creado = ft.Banner(
         bgcolor=ft.colors.RED_600,
@@ -56,16 +63,17 @@ def creative(page:ft.Page):
         ]
     )
     
-    correo_field = ft.TextField( width=300, label="Email")
-    password_field = ft.TextField( width=300, label="Password",can_reveal_password=True,password=True)
-    name_field=ft.TextField(label="Ingresa tu nombre")
+    correo_field = ft.TextField( width=300, label="Email", on_change=habil)
+    password_field = ft.TextField( width=300, label="Password",can_reveal_password=True,password=True,on_change=habil)
+    name_field=ft.TextField(label="Ingresa tu nombre",on_change=habil)
+    btn= ft.ElevatedButton("Crear cuenta",on_click=crear,disabled=True)
     corr = ft.Container(
         ft.Column([
             ft.Row([ft.Text("Crear Cuenta")]),
             ft.Row([correo_field]),
             ft.Row([password_field]),
             ft.Row([name_field]),
-            ft.Row([ft.ElevatedButton("Crear cuenta",on_click=crear)])
+            ft.Row([btn])
         ])
     )
     page.add(corr)

@@ -4,6 +4,7 @@ import flet as ft
 import bcrypt
 from navigation import nav
 from recoverp import recov
+from create import creative
 
 
 uri = "mongodb+srv://crisesv18:LoKY1804@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
@@ -30,6 +31,8 @@ def inic(page):
         page.controls.append(recov(page))
     def create(e):
         page.controls.clear()
+        page.controls.append(creative(page))
+        
 
 
 
