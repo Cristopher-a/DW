@@ -7,7 +7,7 @@ from recoverp import recov
 from create import creative
 
 
-uri = "mongodb+srv://crisesv18:LoKY1804@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
+uri = "mongodb+srv://crisesv18:Tanke1804.@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 

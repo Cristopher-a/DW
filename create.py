@@ -64,8 +64,21 @@ def creative(page:ft.Page):
     )
     
     correo_field = ft.TextField( width=300, label="Email", on_change=habil)
-    password_field = ft.TextField( width=300, label="Password",can_reveal_password=True,password=True,on_change=habil)
+    password_field = ft.TextField( width=300, label="Contraseña",can_reveal_password=True,password=True,on_change=habil)
     name_field=ft.TextField(label="Ingresa tu nombre",on_change=habil)
+    number_field= ft.TextField(label="Numero",on_change=habil,keyboard_type=ft.KeyboardType.NUMBER)
+    country_dropdown= ft.Dropdown(
+        options=[
+            ft.dropdown.Option("Mexico"),
+            ft.dropdown.Option("Estados Unidos"),
+            ft.dropdown.Option("Canada"),
+            ft.dropdown.Option("Chile"),
+            ft.dropdown.Option("Brasil"),
+            ft.dropdown.Option("Colombia"),
+            ft.dropdown.Option("España"),
+        ]
+        ,
+    )
     btn= ft.ElevatedButton("Crear cuenta",on_click=crear,disabled=True)
     corr = ft.Container(
         ft.Column([
@@ -73,7 +86,8 @@ def creative(page:ft.Page):
             ft.Row([correo_field]),
             ft.Row([password_field]),
             ft.Row([name_field]),
-            ft.Row([btn])
+            ft.Row([btn]),
+            ft.Row([country_dropdown]),
         ])
     )
     page.add(corr)
