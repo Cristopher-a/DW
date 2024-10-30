@@ -4,9 +4,9 @@ def dsh(page):
     categoria = ft.Dropdown(
         hint_text="Categoria",
         options=[
-            ft.dropdown.Option(text="Categoría 1"), 
-            ft.dropdown.Option(text="Categoría 2"), 
-            ft.dropdown.Option(text="Categoría 3")
+            ft.dropdown.Option(text="Computadoras"), 
+            ft.dropdown.Option(text="Herramientas"), 
+            ft.dropdown.Option(text="Robot"),
         ]
     )
     file_picker = ft.FilePicker()
@@ -26,10 +26,10 @@ def dsh(page):
                         categoria
                     ]),
                     ft.Row([
-                       ft.ElevatedButton("Choose files...",on_click=lambda _: file_picker.pick_files(allow_multiple=True))
+                       ft.ElevatedButton("Choose files...",on_click=lambda _: file_picker.pick_files(allow_multiple=False,file_type=ft.FilePickerFileType.IMAGE))
                     ]),
                     ft.Row([
-                        ft.ElevatedButton("Guardar", icon=ft.icons.CHECK,on_click=print("Hola"))
+                        ft.ElevatedButton("Guardar", icon=ft.icons.CHECK)
                     ]),
                 ]
             ),
@@ -39,3 +39,6 @@ def dsh(page):
         margin=ft.margin.only(top=28)
     )  
     page.add(d)
+
+if __name__ == "__main__":
+    ft.app(target=dsh)

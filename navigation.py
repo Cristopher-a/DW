@@ -61,3 +61,5 @@ def nav(page: ft.Page):
     page.add(navigation_bar)
     dsh(page) 
 
+if __name__ == "__main__":
+    ft.app(target=nav)

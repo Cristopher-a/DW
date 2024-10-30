@@ -38,13 +38,31 @@ def creative(page:ft.Page):
             page.open(creado)
             Timer(3, close_banner, args=(page, creado)).start()
     def habil(e):
-        if all([correo_field.value, password_field.value, name_field.value]):
+        if all([correo_field.value, password_field.value, name_field.value,number_field.value]) and  country_dropdown.value!=None:
             btn.disabled = False
             page.update()
         else:
             btn.disabled = True
             page.update()
-
+    def lada(e):
+        if country_dropdown.value=="México":
+            number_field.prefix_text="+52"
+            page.update()
+        if country_dropdown.value=="Estados Unidos":
+            number_field.prefix_text="+1"
+            page.update()
+        if country_dropdown.value=="Canadá":
+            number_field.prefix_text="+1"
+            page.update()
+        if country_dropdown.value=="Brasil":
+            number_field.prefix_text="+55"
+            page.update()
+        if country_dropdown.value=="Colombia":
+            number_field.prefix_text="+57"
+            page.update()
+        if country_dropdown.value=="España":
+            number_field.prefix_text="+34"
+            page.update()
     creado = ft.Banner(
         bgcolor=ft.colors.RED_600,
         leading=ft.Icon(ft.icons.CREATE_NEW_FOLDER_OUTLINED, color=ft.colors.RED_800, size=40),
@@ -66,18 +84,23 @@ def creative(page:ft.Page):
     correo_field = ft.TextField( width=300, label="Email", on_change=habil)
     password_field = ft.TextField( width=300, label="Contraseña",can_reveal_password=True,password=True,on_change=habil)
     name_field=ft.TextField(label="Ingresa tu nombre",on_change=habil)
-    number_field= ft.TextField(label="Numero",on_change=habil,keyboard_type=ft.KeyboardType.NUMBER)
+    number_field= ft.TextField(label="Numero",on_change=habil,input_filter=ft.InputFilter(allow=True, regex_string=r"^[0-9]*$", replacement_string=""),keyboard_type=ft.KeyboardType.NUMBER)
     country_dropdown= ft.Dropdown(
         options=[
-            ft.dropdown.Option("Mexico"),
+            ft.dropdown.Option("México"),
             ft.dropdown.Option("Estados Unidos"),
-            ft.dropdown.Option("Canada"),
+            ft.dropdown.Option("Canadá"),
             ft.dropdown.Option("Chile"),
             ft.dropdown.Option("Brasil"),
             ft.dropdown.Option("Colombia"),
             ft.dropdown.Option("España"),
         ]
         ,
+        label="Pais"
+        ,
+        hint_text="Ingresa tu pais"
+        ,
+        on_change=lada
     )
     btn= ft.ElevatedButton("Crear cuenta",on_click=crear,disabled=True)
     corr = ft.Container(
@@ -86,8 +109,10 @@ def creative(page:ft.Page):
             ft.Row([correo_field]),
             ft.Row([password_field]),
             ft.Row([name_field]),
-            ft.Row([btn]),
             ft.Row([country_dropdown]),
+            ft.Row([number_field]),
+            ft.Row([btn]),
+            
         ])
     )
     page.add(corr)
