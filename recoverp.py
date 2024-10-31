@@ -97,10 +97,10 @@ def recov(page: ft.Page):
 
     
     correo_field = ft.TextField(hint_text="Email", width=300, label="Email")
-    txt1 = ft.TextField(max_length=1, counter_text=" ", text_size=40, width=50, on_change=co)
-    txt2 = ft.TextField(max_length=1, counter_text=" ", text_size=40, width=50, on_change=co)
-    txt3 = ft.TextField(max_length=1, counter_text=" ", text_size=40, width=50, on_change=co)
-    txt4 = ft.TextField(max_length=1, counter_text=" ", text_size=40, width=50, on_change=co)
+    txt1 = ft.TextField(max_length=1, counter_text=" ",input_filter=ft.InputFilter(allow=True, regex_string=r"^[0-9]*$", replacement_string=""),text_size=40, width=50, on_change=co)
+    txt2 = ft.TextField(max_length=1, counter_text=" ",input_filter=ft.InputFilter(allow=True, regex_string=r"^[0-9]*$", replacement_string=""), text_size=40, width=50, on_change=co)
+    txt3 = ft.TextField(max_length=1, counter_text=" ",input_filter=ft.InputFilter(allow=True, regex_string=r"^[0-9]*$", replacement_string=""), text_size=40, width=50, on_change=co)
+    txt4 = ft.TextField(max_length=1, counter_text=" ",input_filter=ft.InputFilter(allow=True, regex_string=r"^[0-9]*$", replacement_string=""), text_size=40, width=50, on_change=co)
     
     tn = ft.ElevatedButton("Submit", on_click=r, disabled=True)
     txtcont = ft.TextField(label="Ingresa la nueva contraseña", password=True, can_reveal_password=True, on_change=cocon)
