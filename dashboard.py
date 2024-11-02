@@ -30,48 +30,12 @@ def dsh(page):
                 ]
             ),
             padding=25,
+            width=400
         )
     )  
-    
-    # Vista de cuadrícula para imágenes - Columna Derecha
-    dash = ft.GridView(
-        runs_count=3,
-        max_extent=150,
-        child_aspect_ratio=1.0,
-        spacing=5,
-        run_spacing=5,
-    )
+    dash=ft.c
+    page.add(controller)
 
-    # Llenado de imágenes en el GridView
-    for i in range(0, 20):  # Reducido a 20 imágenes para mejor visualización
-        dash.controls.append(
-            ft.Image(
-                src=f"https://picsum.photos/150/150?{i}",
-                fit=ft.ImageFit.NONE,
-                repeat=ft.ImageRepeat.NO_REPEAT,
-                border_radius=ft.border_radius.all(10),
-            )
-        )
-
-    # Estructura de la interfaz con controller y dash en columnas separadas sin expansión vertical
-    page.add(
-        ft.Row(
-            [
-                ft.Container(
-                    content=ft.Column([controller]),
-                    width=400,  # Ancho fijo solo horizontalmente
-                    alignment=ft.alignment.top_left  # Alineación superior izquierda
-                ),
-                ft.Container(
-                    content=ft.Column([dash]),
-                    width=600,  # Ancho fijo solo horizontalmente
-                    alignment=ft.alignment.top_left  # Alineación superior izquierda
-                ),
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=20  # Espaciado entre las dos columnas
-        )
-    )
 
 if __name__ == "__main__":
     ft.app(target=dsh)

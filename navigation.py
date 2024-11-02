@@ -1,5 +1,4 @@
 import flet as ft
-from dashboard import dsh
 
 def nav(page: ft.Page):
     
@@ -10,7 +9,7 @@ def nav(page: ft.Page):
 
         if index == 0:
             page.add(navigation_bar)
-            dsh(page)  
+            page.add(ft.Text("Sección Equipos"))
         elif index == 1:
             page.add(navigation_bar)
             page.add(ft.Text("Sección Equipos"))
@@ -59,7 +58,7 @@ def nav(page: ft.Page):
     )
 
     page.add(navigation_bar)
-    dsh(page) 
+
 
 if __name__ == "__main__":
     ft.app(target=nav)
