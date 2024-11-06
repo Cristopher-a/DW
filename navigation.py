@@ -1,17 +1,18 @@
-# En navigation.py
 import flet as ft
 from dashboard import dsh
 
-def nav(page: ft.Page):
-    
+def nav(page: ft.Page, correo): 
+    is_mobile = page.width < 600
+    page.window.maximized = not is_mobile
+
     def change(e):
-        
         index = e.control.selected_index
         page.controls.clear()
 
-        if index == 0:
+        if (index == 0):
             page.add(navigation_bar)
-            page.add(dsh(page))
+            page.add(dsh(page, correo))  
+            return ft.Column([navigation_bar, dsh(page, correo)])
         elif index == 1:
             page.add(navigation_bar)
             page.add(ft.Text("Sección Equipos"))
@@ -58,9 +59,7 @@ def nav(page: ft.Page):
             ),
         ]
     )
-
-    page.add(navigation_bar)
-    page.add(dsh(page))  # dsh(page) ahora retorna un control válido
-
+    page.add(dsh(page, correo))  
+    return navigation_bar
 if __name__ == "__main__":
-    ft.app(target=nav)
+    ft.app(target=lambda page: nav(page, "correo@example.com")) 

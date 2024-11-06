@@ -1,14 +1,16 @@
 import flet as ft
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from datetime import datetime
 
 uri = "mongodb+srv://crisesv18:Tanke1804.@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
 client = MongoClient(uri, server_api=ServerApi('1'))
 
-def dsh(page):
-    is_mobile = page.width < 600  
-    page.window.maximized = not is_mobile  
+def dsh(page, correo):
+    is_mobile = page.width < 600
+    page.window.maximized = not is_mobile
 
+    
     grid_view = ft.GridView(
         expand=False,
         max_extent=300 if not is_mobile else 150,
@@ -18,9 +20,10 @@ def dsh(page):
     )
 
     def cargar_dispositivos():
+        cor=correo
         db = client['BlueApp']
         collection = db['Devices']
-        dispositivos = collection.find()
+        dispositivos = collection.find({"Correo":cor})
         for dispositivo in dispositivos:
             content = ft.Card(
                 content=ft.Column([
@@ -42,55 +45,37 @@ def dsh(page):
     )
     name = ft.TextField(label="Nombre del dispositivo")
     watts = ft.TextField(label="Watts", suffix_text="W", keyboard_type=ft.KeyboardType.NUMBER)
-    
-    selected_images = []  # Lista para almacenar las rutas de las imágenes seleccionadas
-
-    # Lógica de selección de archivos
-    def pick_files_result(e: ft.FilePickerResultEvent):
-        if e.files:
-            selected_images.clear()  # Limpiar imágenes previas
-            for file in e.files:
-                selected_images.append(file.path)  # Guardar ruta de cada archivo seleccionado
-
-    pick_files_dialog = ft.FilePicker(on_result=pick_files_result)
-    page.overlay.append(pick_files_dialog)
-
-    files = ft.ElevatedButton(
-        "Seleccionar archivos",
-        on_click=lambda _: pick_files_dialog.pick_files(allow_multiple=True)
-    )
-
+   
     def agregar(e):
+        cor=correo
         nombre = name.value
         wts = watts.value
         categoria = type_dropdown.value
-        
-        # Crear lista de componentes de imagen para el contenido de la tarjeta
-        image_components = [
-            ft.Image(src=image_path, width=100, height=100, fit=ft.ImageFit.CONTAIN)
-            for image_path in selected_images
-        ]
-        
-        # Agregar dispositivo con las imágenes al grid
+        db = client['root']
+        collection = db['users']
+        resultado=collection.find_one({"email":cor},{"name":1,"_id":0})
         content = ft.Card(
             content=ft.Column([
                 ft.Text(f"Nombre: {nombre}"),
                 ft.Text(f"Categoria: {categoria}"),
                 ft.Text(f"Watts: {wts}"),
-                *image_components  # Agregar imágenes dentro de la tarjeta del dispositivo
+                ft.Text(f"Usuario: {resultado.get("name")}")
             ])
         )
         grid_view.controls.append(content) 
         page.update()
 
-        # Guardar dispositivo en MongoDB
         db = client['BlueApp']
         collection = db['Devices']
         dispositivo = {
             "Dispositivo": nombre,
             "Watss": wts,
             "Categoria": categoria,
-            "Imagenes": selected_images  # Guardar rutas de imágenes en la base de datos
+            "Correo":correo,
+            "Nombre":resultado.get("name"),
+            "FechaInic": datetime.now(),
+            "FechaFin": None
+
         }
         collection.insert_one(dispositivo)
 
@@ -101,7 +86,6 @@ def dsh(page):
                     ft.Row([name]),
                     ft.Row([watts]),
                     ft.Row([type_dropdown]),
-                    ft.Row([files]),  # Botón para seleccionar archivos
                     ft.Row([ft.ElevatedButton("Guardar", icon=ft.icons.CHECK, on_click=agregar)]),
                 ]),
                 padding=25,
