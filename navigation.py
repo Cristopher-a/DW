@@ -1,5 +1,6 @@
 import flet as ft
 from dashboard import dsh
+from team import  tm
 
 def nav(page: ft.Page, correo): 
     is_mobile = page.width < 600
@@ -12,10 +13,9 @@ def nav(page: ft.Page, correo):
         if (index == 0):
             page.add(navigation_bar)
             page.add(dsh(page, correo))  
-            return ft.Column([navigation_bar, dsh(page, correo)])
         elif index == 1:
             page.add(navigation_bar)
-            page.add(ft.Text("Sección Equipos"))
+            page.add(tm(page,correo))
         elif index == 2:
             page.add(navigation_bar)
             page.add(ft.Text("Sección Uso"))

@@ -13,6 +13,10 @@ def creative(page:ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.title = "Crear Cuenta"
     page.padding = ft.Margin(20, 20, 20, 20)
+    def ir(e):
+        from index import inic
+        page.controls.clear()
+        page.controls.append(inic(page))
 
     def close_banner(page, banner):
       page.close(banner)
@@ -103,6 +107,7 @@ def creative(page:ft.Page):
         on_change=lada
     )
     btn= ft.ElevatedButton("Crear cuenta",on_click=crear,disabled=True)
+    btnir= ft.ElevatedButton("Regresar",on_click=ir,disabled=True)
     corr = ft.Container(
         ft.Column([
             ft.Row([ft.Text("Crear Cuenta")]),
@@ -112,6 +117,7 @@ def creative(page:ft.Page):
             ft.Row([country_dropdown]),
             ft.Row([number_field]),
             ft.Row([btn]),
+            ft.Roe([btnir])
             
         ])
     )

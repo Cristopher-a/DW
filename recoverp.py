@@ -6,7 +6,6 @@ import smtplib
 from email.message import EmailMessage
 import random
 import bcrypt
-import time
 from threading import Timer
 
 n = 0
