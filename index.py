@@ -13,6 +13,7 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 
 
 def inic(page):
+    page.padding = ft.Margin(10, 10, 10, 10)
     is_mobile = page.width < 600
     page.window.maximized = not is_mobile
 
@@ -21,7 +22,6 @@ def inic(page):
     page.title = "Blue Switch"
     
     user_field = ft.TextField(label="Correo", width=300)
-    password_field = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, width=300)
 
     banner = ft.Banner( 
         bgcolor=ft.colors.RED_600,
@@ -59,7 +59,7 @@ def inic(page):
             page.update 
 
       page.update()
-
+    password_field = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, width=300,on_submit=iniciar_sesion)
     con = ft.Container(
         ft.Column([
             ft.Row([ft.Text("Blue Switch", text_align="center")], alignment=ft.MainAxisAlignment.CENTER),

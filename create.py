@@ -4,11 +4,12 @@ from pymongo.server_api import ServerApi
 from threading import Timer
 import bcrypt
 
-uri = "mongodb+srv://crisesv18:LoKY1804@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
+uri = "mongodb+srv://crisesv18:Tanke1804.@aztech.ww3ye9j.mongodb.net/?retryWrites=true&w=majority&appName=aztech"
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 
 def creative(page:ft.Page):
+    page.padding = ft.Margin(10, 10, 10, 10)
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.title = "Crear Cuenta"
@@ -117,7 +118,7 @@ def creative(page:ft.Page):
             ft.Row([country_dropdown]),
             ft.Row([number_field]),
             ft.Row([btn]),
-            ft.Roe([btnir])
+            ft.Row([btnir])
             
         ])
     )

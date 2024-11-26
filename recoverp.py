@@ -14,7 +14,7 @@ uri = "mongodb+srv://crisesv18:Tanke1804.@aztech.ww3ye9j.mongodb.net/?retryWrite
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 def recov(page: ft.Page):
-
+    page.padding = ft.Margin(10, 10, 10, 10)
     page.title = "Recovery Page"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER

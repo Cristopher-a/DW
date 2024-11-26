@@ -8,8 +8,6 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['BlueApp']
 collection = db['Devices']
 w=.0675
-resultado=collection.find_one({"Correo":"crisesv4@gmail.com"},{"FechaInic":1,"_id":0})
-print(resultado.get("FechaInic"))
 r=(datetime.now())-(resultado.get("FechaInic"))
 print(r.total_seconds()/3600)
 energia_consumida = w * r.total_seconds()/3600
