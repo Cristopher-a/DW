@@ -11,13 +11,17 @@ uri = "mongodb+srv://crisesv18:Tanke1804.@aztech.ww3ye9j.mongodb.net/?retryWrite
 client = MongoClient(uri, server_api=ServerApi('1'))
 
 
+
 def inic(page):
+    page.padding = ft.Margin(10, 10, 10, 10)
+    is_mobile = page.width < 600
+    page.window.maximized = not is_mobile
+
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.title = "Blue Switch"
     
-    user_field = ft.TextField(label="Usuario", width=300)
-    password_field = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, width=300)
+    user_field = ft.TextField(label="Correo", width=300)
 
     banner = ft.Banner( 
         bgcolor=ft.colors.RED_600,
@@ -38,23 +42,24 @@ def inic(page):
 
 
     def iniciar_sesion(e):
-        user = user_field.value
-        password = password_field.value
-        
-        db = client['root']
-        collection = db['users']
-        user_data = collection.find_one({"email": user})
-        
-        if user_data:
-            contraseña_encriptada = user_data.get("password")
-            if bcrypt.checkpw(password.encode('utf-8'), contraseña_encriptada.encode('utf-8')):
-                cargar_dashboard(page) 
-            else:
-                page.open(banner)
+      user = user_field.value
+      password = password_field.value
+      db = client['root']
+      collection = db['users']
+      user_data = collection.find_one({"email": user})
+      if user_data:
+        contraseña_encriptada = user_data.get("password")
+        if bcrypt.checkpw(password.encode('utf-8'), contraseña_encriptada.encode('utf-8')):
+            cargar_dashboard(page, user)
         else:
             page.open(banner)
-        
-        page.update()
+            page.update  
+      else:
+            page.open(banner)
+            page.update 
+
+      page.update()
+    password_field = ft.TextField(label="Contraseña", password=True, can_reveal_password=True, width=300,on_submit=iniciar_sesion)
     con = ft.Container(
         ft.Column([
             ft.Row([ft.Text("Blue Switch", text_align="center")], alignment=ft.MainAxisAlignment.CENTER),
@@ -68,10 +73,11 @@ def inic(page):
 
     page.add(con)
 
-def cargar_dashboard(page):
+def cargar_dashboard(page, correo):
     page.controls.clear()
-    page.controls.append(nav(page))
+    page.controls.append(nav(page, correo))  
     page.update()
+
 
 if __name__ == "__main__":
     ft.app(target=inic)
